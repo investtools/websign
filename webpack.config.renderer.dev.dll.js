@@ -176,7 +176,12 @@ export default merge.smart(baseConfig, {
     renderer: (
       Object
         .keys(dependencies || {})
-        .filter(dependency => dependency !== 'font-awesome')
+        .filter(dependency =>
+          dependency !== 'font-awesome' &&
+          dependency !== 'typeface-open-sans' &&
+          dependency !== 'popper.js' &&
+          dependency !== 'jquery' &&
+          dependency !== 'bootstrap')
     )
   },
 

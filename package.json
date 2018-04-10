@@ -190,6 +190,7 @@
     "bootstrap": "^4.0.0",
     "devtron": "^1.4.0",
     "electron-debug": "^1.5.0",
+    "extensible-duck": "^1.4.0",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "react": "^16.2.0",

@@ -45,7 +45,7 @@ export default class CertSelector extends Component<Props> {
             {this.origin()}
           </div>
         </div>
-        <div className="row fill" style={{ overflow: 'scroll' }}>
+        <div className="row fill" style={{ overflowY: 'auto' }}>
           <div className="col">
             <div className="list-group">
               {this.props.certificates.map(cert => (

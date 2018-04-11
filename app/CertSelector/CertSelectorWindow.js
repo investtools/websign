@@ -2,6 +2,7 @@ import { BrowserWindow, ipcMain } from 'electron';
 
 import { listCertificates, sign } from '../signer';
 import MenuBuilder from '../menu';
+import appURL from '../appURL';
 
 ipcMain.on('websign/certificates/LOAD', event => {
   event.returnValue = listCertificates(); // eslint-disable-line no-param-reassign
@@ -29,7 +30,7 @@ export default function createCertSelectorWindow(origin, data, socket) {
     center: true,
   });
 
-  win.loadURL(`file://${__dirname}/../app.html`);
+  win.loadURL(appURL);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -38,7 +39,9 @@ export default function createCertSelectorWindow(origin, data, socket) {
       throw new Error('"win" is not defined');
     }
     win.show();
+    win.setAlwaysOnTop(true);
     win.focus();
+    win.setAlwaysOnTop(false);
   });
 
   ipcWindow(win, 'websign/certSelector/LOAD', event => {
@@ -56,6 +59,8 @@ export default function createCertSelectorWindow(origin, data, socket) {
     win = null;
   });
 
-  const menuBuilder = new MenuBuilder(win);
-  menuBuilder.buildMenu();
+  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+    const menuBuilder = new MenuBuilder(win);
+    menuBuilder.buildMenu();
+  }
 }

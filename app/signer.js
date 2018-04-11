@@ -1,10 +1,5 @@
-export function listCertificates() {
-  return [
-    { id: '1', name: 'INVESTTOOLS' },
-    { id: '2', name: 'ANDRÉ AIZIM KELMANSON' }
-  ];
-}
-
-export function sign(data, certificate) {
-  return `sign(${data}, ${certificate})`;
+if (process.platform === 'win32') {
+  module.exports = require('./signer.win.js'); // eslint-disable-line global-require
+} else {
+  module.exports = require('./signer.mock.js'); // eslint-disable-line global-require
 }

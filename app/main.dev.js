@@ -12,7 +12,6 @@
  */
 import { app, Tray, Menu } from 'electron';
 import path from 'path';
-
 import startServer from './server';
 import createCertSelectorWindow from './CertSelector/CertSelectorWindow';
 
@@ -48,9 +47,9 @@ const installExtensions = async () => {
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // if (process.platform !== 'darwin') {
+  //   app.quit();
+  // }
 });
 
 
@@ -58,8 +57,7 @@ app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
-
-  const tray = new Tray(path.join(__dirname, 'iconTemplate.png'));
+  const tray = new Tray(path.join(__dirname, 'includes', 'iconTemplate.png'));
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Quit WebSign', click() { app.quit(); } },
   ]);

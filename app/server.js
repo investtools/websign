@@ -8,7 +8,7 @@ module.exports = function startServer(cb) {
   io.origins('*:*');
   io.on('connection', socket => {
     socket.on('sign', data => {
-      cb(socket.request.headers.referer, data, socket);
+      cb(socket.request.headers.origin, data, socket);
     });
   });
 };

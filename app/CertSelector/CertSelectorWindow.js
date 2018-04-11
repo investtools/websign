@@ -28,6 +28,8 @@ export default function createCertSelectorWindow(origin, data, socket) {
     width: 500,
     height: 400,
     center: true,
+    titleBarStyle: 'hidden',
+    maximizable: false
   });
 
   win.loadURL(appURL);

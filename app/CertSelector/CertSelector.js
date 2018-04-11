@@ -1,4 +1,5 @@
 // @flow
+import { UserAgent } from '@quentin-sommer/react-useragent';
 import React, { Component } from 'react';
 
 type Props = {
@@ -39,9 +40,14 @@ export default class CertSelector extends Component<Props> {
   render() {
     return (
       <div className="d-flex h-100 flex-column">
+        <UserAgent mac>
+          <div className="row px-4" id="titlebar">
+            <div className="col text-center pt-1 px-5">WebSign</div>
+          </div>
+        </UserAgent>
         <div className="row">
           <div className="col">
-            <h1 className="text-overflow pt-4">Selecione um certificado</h1>
+            <h1 className="text-overflow pt-2">Selecione um certificado</h1>
             {this.origin()}
           </div>
         </div>

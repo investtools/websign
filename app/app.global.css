@@ -8,18 +8,19 @@
 @import "~typeface-open-sans";
 
 body {
+  background: #343b47;
   font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
   font-weight: normal;
   color: #ababab;
 }
 
-html,body,#root,#root>div{
-    height:100%;
+#titlebar {
+  -webkit-app-region: drag;
 }
 
-body   {
-  background: #343b47;
+html,body,#root,#root>div{
+    height:100%;
 }
 
 button, button:focus {

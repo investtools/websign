@@ -92,7 +92,11 @@ export function sign(data, certificate) {
         return;
       }
       if (certName(pCtx) === certificate) {
-        return signMessage(pCtx, data).toString('base64');
+        const signed = signMessage(pCtx, data);
+        if (!signed) {
+          return data.toString('base64');
+        }
+        return signed.toString('base64');
       }
     }
   } finally {

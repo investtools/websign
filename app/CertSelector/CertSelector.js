@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 type Props = {
   certificates: Array<{
     id: string,
-    name: string
+    subject: string,
+    issuer: string
   }>,
   origin: string,
   selected?: string,
@@ -56,7 +57,8 @@ export default class CertSelector extends Component<Props> {
             <div className="list-group">
               {this.props.certificates.map(cert => (
                 <button key={cert.id} className={`list-group-item list-group-item-action ${this.props.selected === cert.id && 'active'}`} onClick={() => this.props.onSelect(cert.id)}>
-                  {cert.name}
+                  {cert.subject}
+                  <div className="issuer">{cert.issuer}</div>
                 </button>
               ))}
             </div>

@@ -48,6 +48,7 @@ h1 {
   border-color: rgba(255,255,255,0.03);
   background-color: transparent;
   color: #ababab;
+  padding: 0.55rem 1.25rem;
 }
 
 
@@ -66,7 +67,7 @@ h1 {
   background-color: #3d4553;
 }
 
-h2 {
+h2, .issuer {
   color: rgba(212, 212, 212, 0.5);
   font-size: 10px;
   font-weight: 300;
@@ -118,10 +119,14 @@ h2 .host {
 
 .btn-primary, .btn-primary:focus {
 
-    background-color: #0ab1fc;
-    border-color: #0ab1fc !important;
-    color: #fff;
+  background-color: #0ab1fc;
+  border-color: #0ab1fc !important;
+  color: #fff;
 
+}
+
+.list-group-item.active .issuer {
+    color: #fff;
 }
 
 .btn-default {

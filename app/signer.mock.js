@@ -1,7 +1,7 @@
 export function listCertificates() {
   return [
-    { id: '1', name: 'INVESTTOOLS' },
-    { id: '2', name: 'ANDRÉ AIZIM KELMANSON' }
+    { id: '1', subject: 'INVESTTOOLS', issuer: 'ICP-Brasil' },
+    { id: '2', subject: 'ANDRÉ AIZIM KELMANSON', issuer: 'ICP-Brasil' }
   ];
 }
 

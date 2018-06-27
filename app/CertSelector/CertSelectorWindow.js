@@ -1,11 +1,21 @@
-import { BrowserWindow, ipcMain } from 'electron';
+import { BrowserWindow, dialog, ipcMain } from 'electron';
 
-import { listCertificates, sign } from '../signer';
-import MenuBuilder from '../menu';
 import appURL from '../appURL';
+import MenuBuilder from '../menu';
+import { listCertificates, sign } from '../signer';
 
 ipcMain.on('websign/certificates/LOAD', event => {
-  event.returnValue = listCertificates(); // eslint-disable-line no-param-reassign
+  try {
+    event.returnValue = listCertificates(); // eslint-disable-line no-param-reassign
+  } catch (e) {
+    dialog.showMessageBox({
+      type: 'error',
+      title: 'WebSign',
+      message: 'Ooooops!',
+      detail: e.toString()
+    });
+    event.returnValue = []; // eslint-disable-line no-param-reassign
+  }
 });
 
 function createLocalListener(win, listener) {
@@ -51,8 +61,17 @@ export default function createCertSelectorWindow(origin, data, socket) {
   });
 
   ipcWindow(win, 'websign/certSelector/SIGN', (event, certificate) => {
-    socket.emit('signed data', sign(data, certificate));
-    win.close();
+    try {
+      socket.emit('signed data', sign(data, certificate));
+      win.close();
+    } catch (e) {
+      dialog.showMessageBox(win, {
+        type: 'error',
+        title: 'WebSign',
+        message: 'Ooooops!',
+        detail: e.toString()
+      });
+    }
   });
 
   ipcWindow(win, 'websign/certSelector/CANCEL', () => { win.close(); });

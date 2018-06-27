@@ -1,6 +1,8 @@
 {
+  "typescriptHero.imports.insertSemicolons": true,
   "javascript.validate.enable": false,
   "flow.useNPMPackagedFlow": true,
+  "editor.formatOnSave": false,
   "search.exclude": {
     ".git": true,
     ".eslintcache": true,

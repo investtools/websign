@@ -1,4 +1,10 @@
 /* eslint global-require: 0, flowtype-errors/show-errors: 0 */
+import { app, Menu, Tray } from 'electron';
+import path from 'path';
+
+import createCertSelectorWindow from './CertSelector/CertSelectorWindow';
+import startServer from './server';
+
 
 /**
  * This module executes inside of electron's main process. You can start
@@ -10,10 +16,10 @@
  *
  * @flow
  */
-import { app, Tray, Menu } from 'electron';
-import path from 'path';
-import startServer from './server';
-import createCertSelectorWindow from './CertSelector/CertSelectorWindow';
+if (process.platform === 'darwin') {
+  app.dock.hide();
+}
+
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -45,11 +51,15 @@ const installExtensions = async () => {
  */
 
 app.on('window-all-closed', () => {
-  // Respect the OSX convention of having the application in memory even
-  // after all windows have been closed
-  // if (process.platform !== 'darwin') {
-  //   app.quit();
-  // }
+  if (process.platform === 'darwin') {
+    app.dock.hide();
+  }
+});
+
+app.on('browser-window-created', () => {
+  if (process.platform === 'darwin') {
+    app.dock.show();
+  }
 });
 
 
